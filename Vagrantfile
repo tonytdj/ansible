@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 RAM = 2048
-CPU = 1
+CPU = 2
 
 Vagrant.configure("2") do |config|
   config.vm.define "ansible" do |ansible|
