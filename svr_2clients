@@ -1,0 +1,43 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+RAM = 1024
+CPU = 1
+IP1 = "10.0.0.10"
+IP2 = "10.0.0.11"
+IP3 = "10.0.0.12"
+
+Vagrant.configure("2") do |config|
+    # Configure serveur ansbile
+	config.vm.disk :disk, size: "7GB", primary: true
+
+    config.vm.define "serveur" do |srv|
+		srv.vm.box = "ubuntu/focal64"
+		srv.vm.network "private_network", ip: IP1
+    end
+	config.vm.provider "virtualbox" do |v|
+		v.memory = RAM
+		v.cpus = CPU
+	end
+    # Configure machine client1
+	config.vm.disk :disk, size: "2GB", primary: true
+    config.vm.define "client1" do |clt1|
+        clt1.vm.box = "ubuntu/focal64"
+        clt1.vm.network "private_network", ip: IP2
+    end
+		config.vm.provider "virtualbox" do |v|
+		   v.memory = RAM
+		   v.cpus = CPU
+    end
+	
+	# Configure machine client2
+	config.vm.disk :disk, size: "2GB", primary: true
+    config.vm.define "client2" do |clt2|
+        clt2.vm.box = "ubuntu/focal64"
+        clt2.vm.network "private_network", ip: IP3
+    end
+		config.vm.provider "virtualbox" do |v|
+		   v.memory = RAM
+		   v.cpus = CPU
+    end
+end
